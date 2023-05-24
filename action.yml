@@ -15,11 +15,6 @@ runs:
       uses: actions/checkout@v3
       with:
         repository: ${{ github.repository }}
-    - name: Checkout Scripts Repo
-      uses: actions/checkout@v3
-      with:
-        path: ci-scripts
-        repository: pulumi/scripts
     - name: Unshallow clone for tags
       run: git fetch --prune --unshallow --tags
       shell: bash
@@ -52,11 +47,7 @@ runs:
       shell: bash
     - name: Publish Node
       if: inputs.sdk == 'nodejs' || inputs.sdk == 'all'
-      env:
-        NODE_AUTH_TOKEN: ${{ env.NPM_TOKEN }}
-        NO_TFGEN_PYTHON_PACKAGE: skip-python-publishing
-        NUGET_PUBLISH_KEY: ''
-      run: ./ci-scripts/ci/publish-tfgen-package ${{ github.workspace }}
+      run: pulumi package publish-sdk nodejs --path ./sdk/nodejs
       shell: bash
     - name: Setup DotNet
       if: inputs.sdk == 'dotnet' || inputs.sdk == 'all'
