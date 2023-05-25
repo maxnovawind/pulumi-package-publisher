@@ -49,6 +49,8 @@ runs:
       if: inputs.sdk == 'nodejs' || inputs.sdk == 'all'
       run: pulumi package publish-sdk nodejs --path ${{ github.workspace }}/sdk/nodejs/bin
       shell: bash
+      env:
+        NODE_AUTH_TOKEN: ${{ env.NPM_TOKEN }}
     - name: Setup DotNet
       if: inputs.sdk == 'dotnet' || inputs.sdk == 'all'
       uses: actions/setup-dotnet@v1
