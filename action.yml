@@ -47,7 +47,7 @@ runs:
       shell: bash
     - name: Publish Node
       if: inputs.sdk == 'nodejs' || inputs.sdk == 'all'
-      run: pulumi package publish-sdk nodejs --path ${{ github.workspace }}/sdk/nodejs
+      run: pulumi package publish-sdk nodejs --path ${{ github.workspace }}/sdk/bin/nodejs
       shell: bash
     - name: Setup DotNet
       if: inputs.sdk == 'dotnet' || inputs.sdk == 'all'
