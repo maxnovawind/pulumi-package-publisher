@@ -45,12 +45,13 @@ runs:
       run: tar -zxf ${{ github.workspace }}/sdk/nodejs.tar.gz -C
         ${{ github.workspace }}/sdk/nodejs
       shell: bash
+    - name: Authenticate for private NPM registry
+      run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+      shell: bash
     - name: Publish Node
       if: inputs.sdk == 'nodejs' || inputs.sdk == 'all'
       run: pulumi package publish-sdk nodejs --path ${{ github.workspace }}/sdk/nodejs/bin
       shell: bash
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
     - name: Setup DotNet
       if: inputs.sdk == 'dotnet' || inputs.sdk == 'all'
       uses: actions/setup-dotnet@v1
