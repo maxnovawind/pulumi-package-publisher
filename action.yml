@@ -49,11 +49,6 @@ runs:
     - name: Double check npmrc
       run: cat /home/runner/work/_temp/.npmrc
       shell: bash
-    - name: Get package info
-      run: npm info
-      shell: bash
-      env:
-        NODE_AUTH_TOKEN: ${{ env.NODE_AUTH_TOKEN }}
     - name: Run npm whoami
       run: npm whoami
       shell: bash
