@@ -46,16 +46,8 @@ runs:
       run: tar -zxf ${{ github.workspace }}/sdk/nodejs.tar.gz -C
         ${{ github.workspace }}/sdk/nodejs
       shell: bash
-    - name: Double check npmrc
-      run: cat /home/runner/work/_temp/.npmrc
-      shell: bash
     - name: Run npm whoami
       run: npm whoami
-      shell: bash
-      env:
-        NODE_AUTH_TOKEN: ${{ env.NODE_AUTH_TOKEN }}
-    - name: Try to use npm publish
-      run: npm publish ${{ github.workspace }}/sdk/nodejs/bin
       shell: bash
       env:
         NODE_AUTH_TOKEN: ${{ env.NODE_AUTH_TOKEN }}
